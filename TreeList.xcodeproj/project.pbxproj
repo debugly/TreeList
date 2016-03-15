@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		48F29B951C97FA43008CA327 /* QLTableViewRowAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F29B941C97FA43008CA327 /* QLTableViewRowAction.m */; };
 		48F29B9B1C97FBE4008CA327 /* RowActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F29B9A1C97FBE4008CA327 /* RowActionButton.m */; };
+		48F29BA21C982DB0008CA327 /* QLDeleteConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F29BA11C982DB0008CA327 /* QLDeleteConfirmView.m */; };
+		48F29BA51C982E72008CA327 /* QLTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F29BA41C982E72008CA327 /* QLTableViewCell.m */; };
 		B4F7140A1C96F3E400129063 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F714091C96F3E400129063 /* main.m */; };
 		B4F7140D1C96F3E400129063 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F7140C1C96F3E400129063 /* AppDelegate.m */; };
 		B4F714101C96F3E400129063 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F7140F1C96F3E400129063 /* MasterViewController.m */; };
@@ -25,6 +27,10 @@
 		48F29B991C97FBE4008CA327 /* RowActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowActionButton.h; sourceTree = "<group>"; };
 		48F29B9A1C97FBE4008CA327 /* RowActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowActionButton.m; sourceTree = "<group>"; };
 		48F29B9C1C97FFA2008CA327 /* QLTableViewRowActionInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QLTableViewRowActionInternal.h; sourceTree = "<group>"; };
+		48F29BA01C982DB0008CA327 /* QLDeleteConfirmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLDeleteConfirmView.h; sourceTree = "<group>"; };
+		48F29BA11C982DB0008CA327 /* QLDeleteConfirmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLDeleteConfirmView.m; sourceTree = "<group>"; };
+		48F29BA31C982E72008CA327 /* QLTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLTableViewCell.h; sourceTree = "<group>"; };
+		48F29BA41C982E72008CA327 /* QLTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLTableViewCell.m; sourceTree = "<group>"; };
 		B4F714051C96F3E400129063 /* TreeList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TreeList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4F714091C96F3E400129063 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B4F7140B1C96F3E400129063 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -77,6 +83,10 @@
 				B4F714231C96F3FD00129063 /* TreeModel.m */,
 				B4F7140E1C96F3E400129063 /* MasterViewController.h */,
 				B4F7140F1C96F3E400129063 /* MasterViewController.m */,
+				48F29BA01C982DB0008CA327 /* QLDeleteConfirmView.h */,
+				48F29BA11C982DB0008CA327 /* QLDeleteConfirmView.m */,
+				48F29BA31C982E72008CA327 /* QLTableViewCell.h */,
+				48F29BA41C982E72008CA327 /* QLTableViewCell.m */,
 				48F29B9C1C97FFA2008CA327 /* QLTableViewRowActionInternal.h */,
 				48F29B931C97FA43008CA327 /* QLTableViewRowAction.h */,
 				48F29B941C97FA43008CA327 /* QLTableViewRowAction.m */,
@@ -174,6 +184,8 @@
 			files = (
 				B4F7140D1C96F3E400129063 /* AppDelegate.m in Sources */,
 				B4F714101C96F3E400129063 /* MasterViewController.m in Sources */,
+				48F29BA21C982DB0008CA327 /* QLDeleteConfirmView.m in Sources */,
+				48F29BA51C982E72008CA327 /* QLTableViewCell.m in Sources */,
 				48F29B9B1C97FBE4008CA327 /* RowActionButton.m in Sources */,
 				B4F714241C96F3FD00129063 /* TreeModel.m in Sources */,
 				B4F7140A1C96F3E400129063 /* main.m in Sources */,

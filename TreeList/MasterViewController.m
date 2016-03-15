@@ -11,10 +11,12 @@
 #import "TreeModel.h"
 #import "QLTableViewRowAction.h"
 #import "RowActionButton.h"
+#import "QLDeleteConfirmView.h"
 
 @interface MasterViewController ()
 
 @property NSMutableArray *objects;
+
 @end
 
 @implementation MasterViewController
@@ -79,9 +81,10 @@
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    UIView *v = [cell viewWithTag:299998];
+    QLDeleteConfirmView *v = [cell viewWithTag:299998];
     if (!v) {
-        v = [UIView new];
+        v = [NSClassFromString(@"UITableViewCellDeleteConfirmationView") new];
+//        v = [QLDeleteConfirmView new];
         [cell insertSubview:v atIndex:0];
     }else{
         [[v subviews]makeObjectsPerformSelector:@selector(removeFromSuperview)];
