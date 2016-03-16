@@ -11,7 +11,7 @@
 #import "TreeModel.h"
 #import "QLTableViewRowAction.h"
 #import "RowActionButton.h"
-#import "QLDeleteConfirmView.h"
+#import "QLTableViewCell.h"
 
 @interface MasterViewController ()
 
@@ -59,12 +59,16 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    QLTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     TreeModel *model = self.objects[indexPath.row];
     cell.indentationLevel = model.leval;
     cell.indentationWidth = 10 * cell.indentationLevel;
     cell.detailTextLabel.text = [model.date description];
     cell.textLabel.text = [NSString stringWithFormat:@"I'm Leval:%ld",model.leval];
+    
+    [cell editActions:^NSArray *(QLTableViewCell *cell) {
+        return [self tableView:tableView editActionsForRowAtIndexPathv7:indexPath];
+    }];
     return cell;
 }
 
@@ -80,56 +84,61 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    QLDeleteConfirmView *v = [cell viewWithTag:299998];
-    if (!v) {
-//        v = [NSClassFromString(@"UITableViewCellDeleteConfirmationView") new];
-        v = [QLDeleteConfirmView new];
-        [cell insertSubview:v atIndex:0];
+//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//    QLDeleteConfirmView *v = [cell viewWithTag:299998];
+//    if (!v) {
+////        v = [NSClassFromString(@"UITableViewCellDeleteConfirmationView") new];
+//        v = [QLDeleteConfirmView new];
+//        v.backgroundColor = [UIColor grayColor];
+////        [cell insertSubview:v atIndex:0];
+////        [cell insertSubview:v belowSubview:cell.contentView];
+////        [cell.contentView addSubview:v];
+////        [cell.contentView removeFromSuperview];
 //        [cell.contentView addSubview:v];
-    }else{
-        [[v subviews]makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    }
-    
+//        [v addTarget:self action:@selector(test2) forControlEvents:UIControlEventTouchUpInside];
+//    }else{
+//        [[v subviews]makeObjectsPerformSelector:@selector(removeFromSuperview)];
+//    }
+//    
     NSArray *actions = [self tableView:tableView editActionsForRowAtIndexPathv7:indexPath];
-    
-    CGFloat height = cell.bounds.size.height;
-    
-    NSMutableArray *btns = [[NSMutableArray alloc]init];
-    [actions enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(QLTableViewRowAction *action, NSUInteger idx, BOOL * _Nonnull stop) {
-        RowActionButton *btn = [RowActionButton buttonWithRowAction:action];
-        [btns addObject:btn];
-        [btn sizeToFit];
-    }];
-    
-    CGFloat lastX = 0;
-    
-    CGFloat detalW = 0;
-    if (btns.count == 1) {
-        detalW = 30;
-    }else if (btns.count == 2){
-        detalW = 33;
-    }else if (btns.count == 3){
-        detalW = 34;
-    }else{
-        detalW = 35;
-    }
-    
-    for (RowActionButton *btn in btns) {
-        CGRect rect = btn.frame;
-        rect.origin.x = lastX;
-        rect.origin.y = 0;
-        rect.size.width += detalW;
-        rect.size.height = height;
-        lastX += rect.size.width;
-        btn.frame = rect;
-        [v addSubview:btn];
-    }
-    v.frame = CGRectMake(cell.bounds.size.width, 0, cell.bounds.size.width * 1.5, cell.bounds.size.height);
-    v.backgroundColor = [UIColor whiteColor];
-    
+//
+//    CGFloat height = cell.bounds.size.height;
+//    
+//    NSMutableArray *btns = [[NSMutableArray alloc]init];
+//    [actions enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(QLTableViewRowAction *action, NSUInteger idx, BOOL * _Nonnull stop) {
+//        RowActionButton *btn = [RowActionButton buttonWithRowAction:action];
+//        [btns addObject:btn];
+//        [btn sizeToFit];
+//    }];
+//    
+//    CGFloat lastX = 0;
+//    
+//    CGFloat detalW = 0;
+//    if (btns.count == 1) {
+//        detalW = 30;
+//    }else if (btns.count == 2){
+//        detalW = 33;
+//    }else if (btns.count == 3){
+//        detalW = 34;
+//    }else{
+//        detalW = 35;
+//    }
+//    
+//    for (RowActionButton *btn in btns) {
+//        CGRect rect = btn.frame;
+//        rect.origin.x = lastX;
+//        rect.origin.y = 0;
+//        rect.size.width += detalW;
+//        rect.size.height = height;
+//        lastX += rect.size.width;
+//        btn.frame = rect;
+//        [v addSubview:btn];
+//    }
+//    v.frame = CGRectMake(cell.bounds.size.width, 0, cell.bounds.size.width * 1.5, cell.bounds.size.height);
+//    
     NSArray *titles = [actions valueForKeyPath:@"title"];
-    
+//
+//    return @"删除";
     return [titles componentsJoinedByString:@"拼接"];
 }
 
