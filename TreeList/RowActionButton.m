@@ -26,7 +26,7 @@
     [btn.titleLabel setFont:[UIFont systemFontOfSize:18]];
     [btn setBackgroundColor:rowAction.backgroundColor];
     
-    [btn addTarget:self action:@selector(clickedAction) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:btn action:@selector(clickedAction) forControlEvents:UIControlEventTouchUpInside];
     
     [rowAction addObserver:btn forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
     [rowAction addObserver:btn forKeyPath:@"backgroundColor" options:NSKeyValueObservingOptionNew context:nil];
@@ -59,12 +59,12 @@
     if (self.rowAction && self.rowAction.RowActionHanler) {
         
         UITableViewCell *cell = (id)self;
-        while ([cell class] != [UITableViewCell class]) {
+        while (![cell isKindOfClass:[UITableViewCell class]]) {
             cell = (id)[cell superview];
         }
         
         UITableView *tb = (id)cell;
-        while ([tb class] != [UITableView class]) {
+        while (![tb isKindOfClass:[UITableView class]]) {
             tb = (id)[tb superview];
         }
         NSIndexPath *idx = [tb indexPathForCell:cell];

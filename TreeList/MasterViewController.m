@@ -83,9 +83,10 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     QLDeleteConfirmView *v = [cell viewWithTag:299998];
     if (!v) {
-        v = [NSClassFromString(@"UITableViewCellDeleteConfirmationView") new];
-//        v = [QLDeleteConfirmView new];
+//        v = [NSClassFromString(@"UITableViewCellDeleteConfirmationView") new];
+        v = [QLDeleteConfirmView new];
         [cell insertSubview:v atIndex:0];
+//        [cell.contentView addSubview:v];
     }else{
         [[v subviews]makeObjectsPerformSelector:@selector(removeFromSuperview)];
     }
