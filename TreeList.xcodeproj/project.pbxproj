@@ -55,6 +55,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		48E8E4D11C9A81BD004A51EA /* MutableEditAction */ = {
+			isa = PBXGroup;
+			children = (
+				48E8E4D21C9A81CE004A51EA /* super(must be extends) */,
+				48F29B9C1C97FFA2008CA327 /* QLTableViewRowActionInternal.h */,
+				48F29B931C97FA43008CA327 /* QLTableViewRowAction.h */,
+				48F29B941C97FA43008CA327 /* QLTableViewRowAction.m */,
+				48F29B991C97FBE4008CA327 /* RowActionButton.h */,
+				48F29B9A1C97FBE4008CA327 /* RowActionButton.m */,
+			);
+			name = MutableEditAction;
+			sourceTree = "<group>";
+		};
+		48E8E4D21C9A81CE004A51EA /* super(must be extends) */ = {
+			isa = PBXGroup;
+			children = (
+				48F29BA31C982E72008CA327 /* QLTableViewCell.h */,
+				48F29BA41C982E72008CA327 /* QLTableViewCell.m */,
+			);
+			name = "super(must be extends)";
+			sourceTree = "<group>";
+		};
 		B4F713FC1C96F3E400129063 = {
 			isa = PBXGroup;
 			children = (
@@ -74,19 +96,13 @@
 		B4F714071C96F3E400129063 /* TreeList */ = {
 			isa = PBXGroup;
 			children = (
+				48E8E4D11C9A81BD004A51EA /* MutableEditAction */,
 				B4F7140B1C96F3E400129063 /* AppDelegate.h */,
 				B4F7140C1C96F3E400129063 /* AppDelegate.m */,
 				B4F714221C96F3FD00129063 /* TreeModel.h */,
 				B4F714231C96F3FD00129063 /* TreeModel.m */,
 				B4F7140E1C96F3E400129063 /* MasterViewController.h */,
 				B4F7140F1C96F3E400129063 /* MasterViewController.m */,
-				48F29BA31C982E72008CA327 /* QLTableViewCell.h */,
-				48F29BA41C982E72008CA327 /* QLTableViewCell.m */,
-				48F29B9C1C97FFA2008CA327 /* QLTableViewRowActionInternal.h */,
-				48F29B931C97FA43008CA327 /* QLTableViewRowAction.h */,
-				48F29B941C97FA43008CA327 /* QLTableViewRowAction.m */,
-				48F29B991C97FBE4008CA327 /* RowActionButton.h */,
-				48F29B9A1C97FBE4008CA327 /* RowActionButton.m */,
 				B4F714111C96F3E400129063 /* DetailViewController.h */,
 				B4F714121C96F3E400129063 /* DetailViewController.m */,
 				B4F714141C96F3E400129063 /* Main.storyboard */,
@@ -295,6 +311,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TreeList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xql.TreeList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -306,6 +323,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TreeList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xql.TreeList;
 				PRODUCT_NAME = "$(TARGET_NAME)";

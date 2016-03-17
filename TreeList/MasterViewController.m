@@ -65,136 +65,7 @@
     cell.indentationWidth = 10 * cell.indentationLevel;
     cell.detailTextLabel.text = [model.date description];
     cell.textLabel.text = [NSString stringWithFormat:@"I'm Leval:%ld",model.leval];
-    
-    [cell editActions:^NSArray *(QLTableViewCell *cell) {
-        return [self tableView:tableView editActionsForRowAtIndexPathv7:indexPath];
-    }];
     return cell;
-}
-
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
-{
-    return UITableViewCellEditingStyleDelete;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//    QLDeleteConfirmView *v = [cell viewWithTag:299998];
-//    if (!v) {
-////        v = [NSClassFromString(@"UITableViewCellDeleteConfirmationView") new];
-//        v = [QLDeleteConfirmView new];
-//        v.backgroundColor = [UIColor grayColor];
-////        [cell insertSubview:v atIndex:0];
-////        [cell insertSubview:v belowSubview:cell.contentView];
-////        [cell.contentView addSubview:v];
-////        [cell.contentView removeFromSuperview];
-//        [cell.contentView addSubview:v];
-//        [v addTarget:self action:@selector(test2) forControlEvents:UIControlEventTouchUpInside];
-//    }else{
-//        [[v subviews]makeObjectsPerformSelector:@selector(removeFromSuperview)];
-//    }
-//    
-    NSArray *actions = [self tableView:tableView editActionsForRowAtIndexPathv7:indexPath];
-//
-//    CGFloat height = cell.bounds.size.height;
-//    
-//    NSMutableArray *btns = [[NSMutableArray alloc]init];
-//    [actions enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(QLTableViewRowAction *action, NSUInteger idx, BOOL * _Nonnull stop) {
-//        RowActionButton *btn = [RowActionButton buttonWithRowAction:action];
-//        [btns addObject:btn];
-//        [btn sizeToFit];
-//    }];
-//    
-//    CGFloat lastX = 0;
-//    
-//    CGFloat detalW = 0;
-//    if (btns.count == 1) {
-//        detalW = 30;
-//    }else if (btns.count == 2){
-//        detalW = 33;
-//    }else if (btns.count == 3){
-//        detalW = 34;
-//    }else{
-//        detalW = 35;
-//    }
-//    
-//    for (RowActionButton *btn in btns) {
-//        CGRect rect = btn.frame;
-//        rect.origin.x = lastX;
-//        rect.origin.y = 0;
-//        rect.size.width += detalW;
-//        rect.size.height = height;
-//        lastX += rect.size.width;
-//        btn.frame = rect;
-//        [v addSubview:btn];
-//    }
-//    v.frame = CGRectMake(cell.bounds.size.width, 0, cell.bounds.size.width * 1.5, cell.bounds.size.height);
-//    
-    NSArray *titles = [actions valueForKeyPath:@"title"];
-//
-//    return @"删除";
-    return [titles componentsJoinedByString:@"拼接"];
-}
-
-- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPathv7:(NSIndexPath *)indexPath
-{
-    QLTableViewRowAction *action1 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleDefault title:@"自动删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
-        
-    }];
-    
-    QLTableViewRowAction *action2 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleDefault title:@"自删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
-        
-    }];
-    action2.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:128.0f/255.0f blue:1.0f/255.0f alpha:1.0];
-    
-    QLTableViewRowAction *action3 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleNormal title:@"删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
-        
-    }];
-    
-    QLTableViewRowAction *action4 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleNormal title:@"不删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
-        
-    }];
-    
-    action4.backgroundColor = [UIColor orangeColor];
-    
-    if (indexPath.row == 0) {
-        return @[action1];
-    }else if (indexPath.row == 1){
-        return @[action1,action2];
-    }else if (indexPath.row == 2){
-        return @[action1,action2,action3];
-    }
-
-    return @[action1,action2,action3,action4];
-}
-
-//- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    UITableViewRowAction*action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"取消自动删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-//        
-//    }];
-//    
-//    UITableViewRowAction*action2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"自动删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-//        
-//    }];
-//    
-//    action2.backgroundColor = [UIColor orangeColor];
-//    UITableViewRowAction*action3 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-//        
-//    }];
-//    
-//    return @[action1,action2];
-//}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-
 }
 
 - (TreeModel *)model4IndexPath:(NSIndexPath *)idx
@@ -271,5 +142,69 @@
     }
     return [arr copy];
 }
+
+#pragma mark - edit logic begin
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray *actions = [self tableView:tableView editActionsForRowAtIndexPath:indexPath];
+    NSArray *titles  = [actions valueForKeyPath:@"title"];
+    return [titles componentsJoinedByString:@"拼接"];
+}
+
+- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    QLTableViewRowAction *action1 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleDefault title:@"1自动删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
+        
+    }];
+    
+    QLTableViewRowAction *action2 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleDefault title:@"2自删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
+        
+    }];
+    
+    QLTableViewRowAction *action3 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleNormal title:@"3删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
+        
+    }];
+    
+    QLTableViewRowAction *action4 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleNormal title:@"4不删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
+        
+    }];
+    
+    NSArray *bgColors = @[[UIColor colorWithRed:255.0f/255.0f green:59.0f/255.0f blue:48.0f/255.0f alpha:1.0],
+                          [UIColor colorWithRed:255.0f/255.0f green:156.0f/255.0f blue:3.0f/255.0f alpha:1.0],
+                          [UIColor colorWithRed:255.0f/255.0f green:128.0f/255.0f blue:1.0f/255.0f alpha:1.0]];
+    
+    action2.backgroundColor = bgColors[1];
+    action3.backgroundColor = bgColors[1];
+    action4.backgroundColor = bgColors[2];
+    if (indexPath.row == 0) {
+        return @[action1];
+    }else if (indexPath.row == 1){
+        return @[action1,action2];
+    }else if (indexPath.row == 2){
+        return @[action1,action2,action3];
+    }
+    
+    return @[action1,action2,action3,action4];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle != UITableViewCellEditingStyleDelete) {
+        //just handle other style
+    }
+}
+
+#pragma mark - edit logic end
 
 @end

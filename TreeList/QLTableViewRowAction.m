@@ -13,7 +13,15 @@
 
 + (instancetype)rowActionWithStyle:(QLTableViewRowActionStyle)style title:(NSString *)title handler:(void (^)(QLTableViewRowAction *action, NSIndexPath *indexPath))handler
 {
-   return [[self alloc]initWithStyle:style title:title handler:handler];
+    QLTableViewRowAction *instance = nil;
+    BOOL iOS8Before = ([[[UIDevice currentDevice]systemVersion]compare:@"8" options:NSNumericSearch] == NSOrderedAscending);
+    if (iOS8Before) {
+        instance = [[QLTableViewRowAction alloc]initWithStyle:style title:title handler:handler];
+    }else{
+        Class clazz = NSClassFromString(@"UITableViewRowAction");
+        instance = [clazz rowActionWithStyle:style title:title handler:handler];
+    }
+    return instance;
 }
 
 - (instancetype)initWithStyle:(QLTableViewRowActionStyle)style title:(NSString *)title handler:(void (^)(QLTableViewRowAction *action, NSIndexPath *indexPath))handler

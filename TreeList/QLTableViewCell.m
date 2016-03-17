@@ -9,34 +9,32 @@
 #import "QLTableViewCell.h"
 #import "RowActionButton.h"
 
-@interface QLTableViewCell ()
-
-@property (nonatomic, copy) NSArray *(^editActionsBlock)(QLTableViewCell *cell);
-
-@end
-
 @implementation QLTableViewCell
 
-- (void)editActions:(NSArray *(^)(QLTableViewCell *))aBlcok
-{
-    self.editActionsBlock = aBlcok;
-}
-
+//处理 iOS8 之前的侧滑按钮
 - (void)insertSubview:(UIView *)view atIndex:(NSInteger)index
 {
-    if (self.editActionsBlock && (NSNotFound != [NSStringFromClass([view class]) rangeOfString:@"TableViewCellDeleteConfirmationView"].location)) {
+    BOOL iOS8Before = ([[[UIDevice currentDevice]systemVersion]compare:@"8" options:NSNumericSearch] == NSOrderedAscending);
+    
+    if (iOS8Before && (NSNotFound != [NSStringFromClass([view class]) rangeOfString:@"TableViewCellDeleteConfirmationView"].location)) {
         
         [[view subviews]makeObjectsPerformSelector:@selector(removeFromSuperview)];
         
-        NSArray *actions = self.editActionsBlock(self);
+        UITableView *tb = (id)self;
+        while (![tb isKindOfClass:[UITableView class]]) {
+            tb = (id)[tb superview];
+        }
+        
+        NSIndexPath *idx = [tb indexPathForCell:self];
+        NSArray *actions = [tb.delegate tableView:tb editActionsForRowAtIndexPath:idx];
+        
         NSMutableArray *btns = [[NSMutableArray alloc]init];
-        for (int i = 0; i < actions.count; i ++) {
-            QLTableViewRowAction *action = actions[i];
+        [actions enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(QLTableViewRowAction *action, NSUInteger idx, BOOL * _Nonnull stop) {
             RowActionButton *btn = [RowActionButton buttonWithRowAction:action];
             [btn sizeToFit];
             [view addSubview:btn];
             [btns addObject:btn];
-        }
+        }];
         
         CGFloat lastX = 0;
         CGFloat detalW = 0;

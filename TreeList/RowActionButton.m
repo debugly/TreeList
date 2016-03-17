@@ -25,7 +25,7 @@
     [btn setTitle:rowAction.title forState:UIControlStateHighlighted];
     [btn.titleLabel setFont:[UIFont systemFontOfSize:18]];
     [btn setBackgroundColor:rowAction.backgroundColor];
-    
+
     [btn addTarget:btn action:@selector(clickedAction) forControlEvents:UIControlEventTouchUpInside];
     
     [rowAction addObserver:btn forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];

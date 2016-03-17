@@ -10,6 +10,4 @@
 
 @interface QLTableViewCell : UITableViewCell
 
-- (void)editActions:(NSArray *(^)(QLTableViewCell *cell))aBlcok;
-
 @end
