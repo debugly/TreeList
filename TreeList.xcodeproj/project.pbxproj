@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		480C65831C9BAFFB0008B1F2 /* DemoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 480C65821C9BAFFB0008B1F2 /* DemoListViewController.m */; };
+		480C65861C9BB1B50008B1F2 /* TreeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 480C65851C9BB1B50008B1F2 /* TreeListViewController.m */; };
+		480C65891C9BB1EC0008B1F2 /* MutableDeleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 480C65881C9BB1EC0008B1F2 /* MutableDeleteViewController.m */; };
+		480C658F1C9BB9030008B1F2 /* MutableSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 480C658E1C9BB9030008B1F2 /* MutableSelectViewController.m */; };
+		480C65961C9BC4800008B1F2 /* MutableSelectDeleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 480C65951C9BC4800008B1F2 /* MutableSelectDeleteViewController.m */; };
 		48F29B951C97FA43008CA327 /* QLTableViewRowAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F29B941C97FA43008CA327 /* QLTableViewRowAction.m */; };
 		48F29B9B1C97FBE4008CA327 /* RowActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F29B9A1C97FBE4008CA327 /* RowActionButton.m */; };
 		48F29BA51C982E72008CA327 /* QLTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F29BA41C982E72008CA327 /* QLTableViewCell.m */; };
 		B4F7140A1C96F3E400129063 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F714091C96F3E400129063 /* main.m */; };
 		B4F7140D1C96F3E400129063 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F7140C1C96F3E400129063 /* AppDelegate.m */; };
-		B4F714101C96F3E400129063 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F7140F1C96F3E400129063 /* MasterViewController.m */; };
 		B4F714131C96F3E400129063 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F714121C96F3E400129063 /* DetailViewController.m */; };
 		B4F714161C96F3E400129063 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4F714141C96F3E400129063 /* Main.storyboard */; };
 		B4F714181C96F3E400129063 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4F714171C96F3E400129063 /* Assets.xcassets */; };
@@ -21,6 +25,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		480C65811C9BAFFB0008B1F2 /* DemoListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoListViewController.h; sourceTree = "<group>"; };
+		480C65821C9BAFFB0008B1F2 /* DemoListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoListViewController.m; sourceTree = "<group>"; };
+		480C65841C9BB1B50008B1F2 /* TreeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeListViewController.h; sourceTree = "<group>"; };
+		480C65851C9BB1B50008B1F2 /* TreeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeListViewController.m; sourceTree = "<group>"; };
+		480C65871C9BB1EC0008B1F2 /* MutableDeleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutableDeleteViewController.h; sourceTree = "<group>"; };
+		480C65881C9BB1EC0008B1F2 /* MutableDeleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutableDeleteViewController.m; sourceTree = "<group>"; };
+		480C658D1C9BB9030008B1F2 /* MutableSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutableSelectViewController.h; sourceTree = "<group>"; };
+		480C658E1C9BB9030008B1F2 /* MutableSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutableSelectViewController.m; sourceTree = "<group>"; };
+		480C65941C9BC4800008B1F2 /* MutableSelectDeleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutableSelectDeleteViewController.h; sourceTree = "<group>"; };
+		480C65951C9BC4800008B1F2 /* MutableSelectDeleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutableSelectDeleteViewController.m; sourceTree = "<group>"; };
 		48F29B931C97FA43008CA327 /* QLTableViewRowAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLTableViewRowAction.h; sourceTree = "<group>"; };
 		48F29B941C97FA43008CA327 /* QLTableViewRowAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLTableViewRowAction.m; sourceTree = "<group>"; };
 		48F29B991C97FBE4008CA327 /* RowActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowActionButton.h; sourceTree = "<group>"; };
@@ -32,8 +46,6 @@
 		B4F714091C96F3E400129063 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B4F7140B1C96F3E400129063 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B4F7140C1C96F3E400129063 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B4F7140E1C96F3E400129063 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		B4F7140F1C96F3E400129063 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		B4F714111C96F3E400129063 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		B4F714121C96F3E400129063 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		B4F714151C96F3E400129063 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -55,7 +67,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		48E8E4D11C9A81BD004A51EA /* MutableEditAction */ = {
+		480C658A1C9BB87B0008B1F2 /* 树形列表 */ = {
+			isa = PBXGroup;
+			children = (
+				B4F714221C96F3FD00129063 /* TreeModel.h */,
+				B4F714231C96F3FD00129063 /* TreeModel.m */,
+				480C65841C9BB1B50008B1F2 /* TreeListViewController.h */,
+				480C65851C9BB1B50008B1F2 /* TreeListViewController.m */,
+			);
+			name = "树形列表";
+			sourceTree = "<group>";
+		};
+		480C658B1C9BB88A0008B1F2 /* 侧滑删除 */ = {
 			isa = PBXGroup;
 			children = (
 				48E8E4D21C9A81CE004A51EA /* super(must be extends) */,
@@ -64,8 +87,58 @@
 				48F29B941C97FA43008CA327 /* QLTableViewRowAction.m */,
 				48F29B991C97FBE4008CA327 /* RowActionButton.h */,
 				48F29B9A1C97FBE4008CA327 /* RowActionButton.m */,
+				480C65871C9BB1EC0008B1F2 /* MutableDeleteViewController.h */,
+				480C65881C9BB1EC0008B1F2 /* MutableDeleteViewController.m */,
 			);
-			name = MutableEditAction;
+			name = "侧滑删除";
+			sourceTree = "<group>";
+		};
+		480C658C1C9BB8A40008B1F2 /* 详情 */ = {
+			isa = PBXGroup;
+			children = (
+				B4F714111C96F3E400129063 /* DetailViewController.h */,
+				B4F714121C96F3E400129063 /* DetailViewController.m */,
+			);
+			name = "详情";
+			sourceTree = "<group>";
+		};
+		480C65901C9BB9070008B1F2 /* 系统编辑 */ = {
+			isa = PBXGroup;
+			children = (
+				480C658D1C9BB9030008B1F2 /* MutableSelectViewController.h */,
+				480C658E1C9BB9030008B1F2 /* MutableSelectViewController.m */,
+			);
+			name = "系统编辑";
+			sourceTree = "<group>";
+		};
+		480C65911C9BB9180008B1F2 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				480C658B1C9BB88A0008B1F2 /* 侧滑删除 */,
+				480C658A1C9BB87B0008B1F2 /* 树形列表 */,
+				480C65901C9BB9070008B1F2 /* 系统编辑 */,
+				480C65931C9BC2F70008B1F2 /* 多选+侧滑 */,
+				480C658C1C9BB8A40008B1F2 /* 详情 */,
+			);
+			name = Pages;
+			sourceTree = "<group>";
+		};
+		480C65921C9BB9280008B1F2 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				480C65811C9BAFFB0008B1F2 /* DemoListViewController.h */,
+				480C65821C9BAFFB0008B1F2 /* DemoListViewController.m */,
+			);
+			name = Root;
+			sourceTree = "<group>";
+		};
+		480C65931C9BC2F70008B1F2 /* 多选+侧滑 */ = {
+			isa = PBXGroup;
+			children = (
+				480C65941C9BC4800008B1F2 /* MutableSelectDeleteViewController.h */,
+				480C65951C9BC4800008B1F2 /* MutableSelectDeleteViewController.m */,
+			);
+			name = "多选+侧滑";
 			sourceTree = "<group>";
 		};
 		48E8E4D21C9A81CE004A51EA /* super(must be extends) */ = {
@@ -96,19 +169,10 @@
 		B4F714071C96F3E400129063 /* TreeList */ = {
 			isa = PBXGroup;
 			children = (
-				48E8E4D11C9A81BD004A51EA /* MutableEditAction */,
 				B4F7140B1C96F3E400129063 /* AppDelegate.h */,
 				B4F7140C1C96F3E400129063 /* AppDelegate.m */,
-				B4F714221C96F3FD00129063 /* TreeModel.h */,
-				B4F714231C96F3FD00129063 /* TreeModel.m */,
-				B4F7140E1C96F3E400129063 /* MasterViewController.h */,
-				B4F7140F1C96F3E400129063 /* MasterViewController.m */,
-				B4F714111C96F3E400129063 /* DetailViewController.h */,
-				B4F714121C96F3E400129063 /* DetailViewController.m */,
-				B4F714141C96F3E400129063 /* Main.storyboard */,
-				B4F714171C96F3E400129063 /* Assets.xcassets */,
-				B4F714191C96F3E400129063 /* LaunchScreen.storyboard */,
-				B4F7141C1C96F3E400129063 /* Info.plist */,
+				480C65921C9BB9280008B1F2 /* Root */,
+				480C65911C9BB9180008B1F2 /* Pages */,
 				B4F714081C96F3E400129063 /* Supporting Files */,
 			);
 			path = TreeList;
@@ -117,6 +181,10 @@
 		B4F714081C96F3E400129063 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B4F714141C96F3E400129063 /* Main.storyboard */,
+				B4F714171C96F3E400129063 /* Assets.xcassets */,
+				B4F714191C96F3E400129063 /* LaunchScreen.storyboard */,
+				B4F7141C1C96F3E400129063 /* Info.plist */,
 				B4F714091C96F3E400129063 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -194,12 +262,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4F7140D1C96F3E400129063 /* AppDelegate.m in Sources */,
-				B4F714101C96F3E400129063 /* MasterViewController.m in Sources */,
+				480C65831C9BAFFB0008B1F2 /* DemoListViewController.m in Sources */,
 				48F29BA51C982E72008CA327 /* QLTableViewCell.m in Sources */,
 				48F29B9B1C97FBE4008CA327 /* RowActionButton.m in Sources */,
 				B4F714241C96F3FD00129063 /* TreeModel.m in Sources */,
 				B4F7140A1C96F3E400129063 /* main.m in Sources */,
+				480C65891C9BB1EC0008B1F2 /* MutableDeleteViewController.m in Sources */,
 				B4F714131C96F3E400129063 /* DetailViewController.m in Sources */,
+				480C65861C9BB1B50008B1F2 /* TreeListViewController.m in Sources */,
+				480C658F1C9BB9030008B1F2 /* MutableSelectViewController.m in Sources */,
+				480C65961C9BC4800008B1F2 /* MutableSelectDeleteViewController.m in Sources */,
 				48F29B951C97FA43008CA327 /* QLTableViewRowAction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

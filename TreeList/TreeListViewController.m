@@ -1,29 +1,34 @@
 //
-//  MasterViewController.m
+//  TreeListViewController.m
 //  TreeList
 //
-//  Created by xuqianlong on 16/3/14.
+//  Created by qianlongxu on 16/3/18.
 //  Copyright © 2016年 Debugly. All rights reserved.
 //
 
-#import "MasterViewController.h"
-#import "DetailViewController.h"
+#import "TreeListViewController.h"
 #import "TreeModel.h"
-#import "QLTableViewRowAction.h"
-#import "RowActionButton.h"
-#import "QLTableViewCell.h"
+#import "DetailViewController.h"
 
-@interface MasterViewController ()
+@interface TreeListViewController ()
 
-@property NSMutableArray *objects;
+@property (nonatomic, strong) NSMutableArray *objects;
 
 @end
 
-@implementation MasterViewController
+@implementation TreeListViewController
+
+- (NSMutableArray *)objects
+{
+    if (!_objects) {
+        _objects = [[NSMutableArray alloc]init];
+    }
+    return _objects;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
 }
@@ -59,7 +64,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    QLTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     TreeModel *model = self.objects[indexPath.row];
     cell.indentationLevel = model.leval;
     cell.indentationWidth = 10 * cell.indentationLevel;
@@ -80,8 +85,8 @@
     DetailViewController *detailViewController = [sb instantiateViewControllerWithIdentifier:@"DetailViewController"];
     detailViewController.detailItem = model;
     [self.navigationController pushViewController:detailViewController animated:YES];
-    
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -142,69 +147,5 @@
     }
     return [arr copy];
 }
-
-#pragma mark - edit logic begin
-
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
-{
-    return UITableViewCellEditingStyleDelete;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSArray *actions = [self tableView:tableView editActionsForRowAtIndexPath:indexPath];
-    NSArray *titles  = [actions valueForKeyPath:@"title"];
-    return [titles componentsJoinedByString:@"拼接"];
-}
-
-- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    QLTableViewRowAction *action1 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleDefault title:@"1自动删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
-        
-    }];
-    
-    QLTableViewRowAction *action2 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleDefault title:@"2自删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
-        
-    }];
-    
-    QLTableViewRowAction *action3 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleNormal title:@"3删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
-        
-    }];
-    
-    QLTableViewRowAction *action4 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleNormal title:@"4不删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
-        
-    }];
-    
-    NSArray *bgColors = @[[UIColor colorWithRed:255.0f/255.0f green:59.0f/255.0f blue:48.0f/255.0f alpha:1.0],
-                          [UIColor colorWithRed:255.0f/255.0f green:156.0f/255.0f blue:3.0f/255.0f alpha:1.0],
-                          [UIColor colorWithRed:255.0f/255.0f green:128.0f/255.0f blue:1.0f/255.0f alpha:1.0]];
-    
-    action2.backgroundColor = bgColors[1];
-    action3.backgroundColor = bgColors[1];
-    action4.backgroundColor = bgColors[2];
-    if (indexPath.row == 0) {
-        return @[action1];
-    }else if (indexPath.row == 1){
-        return @[action1,action2];
-    }else if (indexPath.row == 2){
-        return @[action1,action2,action3];
-    }
-    
-    return @[action1,action2,action3,action4];
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle != UITableViewCellEditingStyleDelete) {
-        //just handle other style
-    }
-}
-
-#pragma mark - edit logic end
 
 @end
