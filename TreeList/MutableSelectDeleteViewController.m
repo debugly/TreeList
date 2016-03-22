@@ -12,6 +12,7 @@
 @interface MutableSelectDeleteViewController ()
 
 @property (nonatomic, strong) NSMutableArray *objects;
+//@property (nonatomic, assign) BOOL isSwipeDeleteStyle;
 
 @end
 
@@ -34,8 +35,9 @@
     while (random--) {
         [self.objects addObject:@(random)];
     }
-    //开启多选编辑
-    self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    
+    //开启多选编辑 iOS 7开启之后会导致不能侧滑！！！
+//    self.tableView.allowsMultipleSelectionDuringEditing = YES;
     
 }
 
@@ -73,9 +75,20 @@
     //nothing,just show delete;
 }
 
+//- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+//{
+//    self.isSwipeDeleteStyle = YES;
+//}
+//
+//- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+//{
+//    self.isSwipeDeleteStyle = NO;
+//}
+
 //重写这个方法，处理多选处理！
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
+    
     if (!editing) {
         NSArray *idxs = self.tableView.indexPathsForSelectedRows;
         
@@ -95,7 +108,9 @@
             [self.tableView deleteRowsAtIndexPaths:idxs withRowAnimation:UITableViewRowAnimationLeft];
             [self.tableView endUpdates];
         }
+        self.tableView.allowsMultipleSelectionDuringEditing = NO;
     }else{
+        self.tableView.allowsMultipleSelectionDuringEditing = YES;
         [super setEditing:editing animated:animated];
     }
 }
