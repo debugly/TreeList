@@ -12,9 +12,9 @@
 		480C65891C9BB1EC0008B1F2 /* MutableDeleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 480C65881C9BB1EC0008B1F2 /* MutableDeleteViewController.m */; };
 		480C658F1C9BB9030008B1F2 /* MutableSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 480C658E1C9BB9030008B1F2 /* MutableSelectViewController.m */; };
 		480C65961C9BC4800008B1F2 /* MutableSelectDeleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 480C65951C9BC4800008B1F2 /* MutableSelectDeleteViewController.m */; };
-		48F29B951C97FA43008CA327 /* QLTableViewRowAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F29B941C97FA43008CA327 /* QLTableViewRowAction.m */; };
-		48F29B9B1C97FBE4008CA327 /* RowActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F29B9A1C97FBE4008CA327 /* RowActionButton.m */; };
-		48F29BA51C982E72008CA327 /* QLTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F29BA41C982E72008CA327 /* QLTableViewCell.m */; };
+		48E84C251CA245CA00308E19 /* QLTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E84C1F1CA245CA00308E19 /* QLTableViewCell.m */; };
+		48E84C261CA245CA00308E19 /* QLTableViewRowAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E84C211CA245CA00308E19 /* QLTableViewRowAction.m */; };
+		48E84C271CA245CA00308E19 /* RowActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E84C241CA245CA00308E19 /* RowActionButton.m */; };
 		B4F7140A1C96F3E400129063 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F714091C96F3E400129063 /* main.m */; };
 		B4F7140D1C96F3E400129063 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F7140C1C96F3E400129063 /* AppDelegate.m */; };
 		B4F714131C96F3E400129063 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F714121C96F3E400129063 /* DetailViewController.m */; };
@@ -35,13 +35,13 @@
 		480C658E1C9BB9030008B1F2 /* MutableSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutableSelectViewController.m; sourceTree = "<group>"; };
 		480C65941C9BC4800008B1F2 /* MutableSelectDeleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutableSelectDeleteViewController.h; sourceTree = "<group>"; };
 		480C65951C9BC4800008B1F2 /* MutableSelectDeleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutableSelectDeleteViewController.m; sourceTree = "<group>"; };
-		48F29B931C97FA43008CA327 /* QLTableViewRowAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLTableViewRowAction.h; sourceTree = "<group>"; };
-		48F29B941C97FA43008CA327 /* QLTableViewRowAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLTableViewRowAction.m; sourceTree = "<group>"; };
-		48F29B991C97FBE4008CA327 /* RowActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowActionButton.h; sourceTree = "<group>"; };
-		48F29B9A1C97FBE4008CA327 /* RowActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowActionButton.m; sourceTree = "<group>"; };
-		48F29B9C1C97FFA2008CA327 /* QLTableViewRowActionInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QLTableViewRowActionInternal.h; sourceTree = "<group>"; };
-		48F29BA31C982E72008CA327 /* QLTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLTableViewCell.h; sourceTree = "<group>"; };
-		48F29BA41C982E72008CA327 /* QLTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLTableViewCell.m; sourceTree = "<group>"; };
+		48E84C1E1CA245CA00308E19 /* QLTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLTableViewCell.h; sourceTree = "<group>"; };
+		48E84C1F1CA245CA00308E19 /* QLTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLTableViewCell.m; sourceTree = "<group>"; };
+		48E84C201CA245CA00308E19 /* QLTableViewRowAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLTableViewRowAction.h; sourceTree = "<group>"; };
+		48E84C211CA245CA00308E19 /* QLTableViewRowAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLTableViewRowAction.m; sourceTree = "<group>"; };
+		48E84C221CA245CA00308E19 /* QLTableViewRowActionInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLTableViewRowActionInternal.h; sourceTree = "<group>"; };
+		48E84C231CA245CA00308E19 /* RowActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowActionButton.h; sourceTree = "<group>"; };
+		48E84C241CA245CA00308E19 /* RowActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowActionButton.m; sourceTree = "<group>"; };
 		B4F714051C96F3E400129063 /* TreeList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TreeList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4F714091C96F3E400129063 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B4F7140B1C96F3E400129063 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -81,12 +81,6 @@
 		480C658B1C9BB88A0008B1F2 /* 侧滑删除 */ = {
 			isa = PBXGroup;
 			children = (
-				48E8E4D21C9A81CE004A51EA /* super(must be extends) */,
-				48F29B9C1C97FFA2008CA327 /* QLTableViewRowActionInternal.h */,
-				48F29B931C97FA43008CA327 /* QLTableViewRowAction.h */,
-				48F29B941C97FA43008CA327 /* QLTableViewRowAction.m */,
-				48F29B991C97FBE4008CA327 /* RowActionButton.h */,
-				48F29B9A1C97FBE4008CA327 /* RowActionButton.m */,
 				480C65871C9BB1EC0008B1F2 /* MutableDeleteViewController.h */,
 				480C65881C9BB1EC0008B1F2 /* MutableDeleteViewController.m */,
 			);
@@ -141,13 +135,18 @@
 			name = "多选+侧滑";
 			sourceTree = "<group>";
 		};
-		48E8E4D21C9A81CE004A51EA /* super(must be extends) */ = {
+		48E84C1D1CA245CA00308E19 /* RowEditSupport */ = {
 			isa = PBXGroup;
 			children = (
-				48F29BA31C982E72008CA327 /* QLTableViewCell.h */,
-				48F29BA41C982E72008CA327 /* QLTableViewCell.m */,
+				48E84C1E1CA245CA00308E19 /* QLTableViewCell.h */,
+				48E84C1F1CA245CA00308E19 /* QLTableViewCell.m */,
+				48E84C201CA245CA00308E19 /* QLTableViewRowAction.h */,
+				48E84C211CA245CA00308E19 /* QLTableViewRowAction.m */,
+				48E84C221CA245CA00308E19 /* QLTableViewRowActionInternal.h */,
+				48E84C231CA245CA00308E19 /* RowActionButton.h */,
+				48E84C241CA245CA00308E19 /* RowActionButton.m */,
 			);
-			name = "super(must be extends)";
+			path = RowEditSupport;
 			sourceTree = "<group>";
 		};
 		B4F713FC1C96F3E400129063 = {
@@ -171,6 +170,7 @@
 			children = (
 				B4F7140B1C96F3E400129063 /* AppDelegate.h */,
 				B4F7140C1C96F3E400129063 /* AppDelegate.m */,
+				48E84C1D1CA245CA00308E19 /* RowEditSupport */,
 				480C65921C9BB9280008B1F2 /* Root */,
 				480C65911C9BB9180008B1F2 /* Pages */,
 				B4F714081C96F3E400129063 /* Supporting Files */,
@@ -261,18 +261,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48E84C251CA245CA00308E19 /* QLTableViewCell.m in Sources */,
 				B4F7140D1C96F3E400129063 /* AppDelegate.m in Sources */,
 				480C65831C9BAFFB0008B1F2 /* DemoListViewController.m in Sources */,
-				48F29BA51C982E72008CA327 /* QLTableViewCell.m in Sources */,
-				48F29B9B1C97FBE4008CA327 /* RowActionButton.m in Sources */,
 				B4F714241C96F3FD00129063 /* TreeModel.m in Sources */,
 				B4F7140A1C96F3E400129063 /* main.m in Sources */,
 				480C65891C9BB1EC0008B1F2 /* MutableDeleteViewController.m in Sources */,
 				B4F714131C96F3E400129063 /* DetailViewController.m in Sources */,
 				480C65861C9BB1B50008B1F2 /* TreeListViewController.m in Sources */,
+				48E84C261CA245CA00308E19 /* QLTableViewRowAction.m in Sources */,
 				480C658F1C9BB9030008B1F2 /* MutableSelectViewController.m in Sources */,
+				48E84C271CA245CA00308E19 /* RowActionButton.m in Sources */,
 				480C65961C9BC4800008B1F2 /* MutableSelectDeleteViewController.m in Sources */,
-				48F29B951C97FA43008CA327 /* QLTableViewRowAction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

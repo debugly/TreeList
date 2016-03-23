@@ -17,6 +17,11 @@
 `最终实现了，iOS8之后 完全使用系统的，之前版本则使用改造的，这与 SW 相比，使用方式不复杂(都需要继承)，并且性能上不存在问题（完全使用懒加载形式，仅当侧滑时才配置侧滑菜单按钮)...`
 
 
+`SW 性能问题：`
+
+<img src="https://github.com/debugly/TreeList/blob/master/Snip20160318_1.png" width="508" height="184">
+
+
 使用方法：
 
 `与 iOS8 系统原生API一样，就是把 UITableViewRowAction 改为 QLTableViewRowAction 就行了；`
