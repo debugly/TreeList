@@ -69,7 +69,7 @@
     cell.indentationLevel = model.leval;
     cell.indentationWidth = 10 * cell.indentationLevel;
     cell.detailTextLabel.text = [model.date description];
-    cell.textLabel.text = [NSString stringWithFormat:@"I'm Leval:%ld",model.leval];
+    cell.textLabel.text = [NSString stringWithFormat:@"I'm Leval:%ld",(long)model.leval];
     return cell;
 }
 

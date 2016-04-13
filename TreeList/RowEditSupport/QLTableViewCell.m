@@ -7,35 +7,138 @@
 //
 
 #import "QLTableViewCell.h"
-#import "RowActionButton.h"
+#import "QLRowActionButton.h"
+#import "QLVersionUtil.h"
+
+@interface QLTableViewCell ()
+{
+    CGFloat swipWidth;
+}
+
+@property (nonatomic, weak) UIView *swipBgView;
+@property (nonatomic, weak) UIView *confirmView;
+
+@end
 
 @implementation QLTableViewCell
 
-- (BOOL)iOS8Before
-{
-    __block BOOL iOS8Before = NO;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        iOS8Before = ([[[UIDevice currentDevice]systemVersion]compare:@"8" options:NSNumericSearch] == NSOrderedAscending);
-    });
-    return iOS8Before;
-}
-
-/*处理iOS8之前的cell；
+/*处理iOS7的cell；
  UITableViewCell
  UITableViewCellScrollView
  UITableViewCellDeleteConfirmationView
  UITableViewCellContentView
- */
-- (void)layoutSubviews
+
+处理iOS6的cell；
+UITableViewCell
+UITableViewCellContentView
+UIView(sep line)
+UITableViewCellDeleteConfirmationControl
+*/
+
+- (void)willTransitionToState:(UITableViewCellStateMask)state
 {
-    [super layoutSubviews];
+    [super willTransitionToState:state];
     
-    if ([self iOS8Before]){
+    if ([QLVersionUtil iOS6]) {
+        if (UITableViewCellStateDefaultMask == state) {
+            if (self.swipBgView) {
+                CGRect desRect = self.confirmView.frame;
+                desRect.origin.x += swipWidth;
+                
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.confirmView.frame = desRect;
+                }completion:^(BOOL finished) {
+                    [self.swipBgView removeFromSuperview];
+                }];
+            }
+        }else if (UITableViewCellStateShowingDeleteConfirmationMask == state){
+            
+            CGRect rect = self.confirmView.frame;
+            CGRect desRect = rect;
+            rect.origin.x += swipWidth;
+            self.confirmView.frame = rect;
+            
+            [UIView animateWithDuration:0.25 animations:^{
+                self.confirmView.frame = desRect;
+            }];
+        }
+    }
+}
+
+- (void)addSubview:(UIView *)confirmView
+{
+    [super addSubview:confirmView];
+    
+    if(self.confirmView){
+        return;
+    }else if ([QLVersionUtil iOS7]) {
+        [self handleiOS7];
+    }else if([QLVersionUtil iOS6]){
+        [self handleiOS6:confirmView];
+    }
+}
+
+- (void)handleiOS6:(UIView *)confirmView
+{
+    if([NSStringFromClass([confirmView class]) isEqualToString:@"UITableViewCellDeleteConfirmationControl"]){
+        
+        [[confirmView subviews] makeObjectsPerformSelector:@selector(setHidden:)withObject:@(YES)];
+        
+        self.confirmView = confirmView;
+        
+        UIView *v = [UIView new];
+        v.frame = self.bounds;
+        
+        UITableView *tb = (id)self;
+        while (![tb isKindOfClass:[UITableView class]]) {
+            tb = (id)[tb superview];
+        }
+        
+        NSIndexPath *idx = [tb indexPathForCell:self];
+        NSArray *actions = [tb.delegate tableView:tb editActionsForRowAtIndexPath:idx];
+        
+        NSMutableArray *btns = [[NSMutableArray alloc]init];
+        [actions enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(QLTableViewRowAction *action, NSUInteger idx, BOOL * _Nonnull stop) {
+            QLRowActionButton *btn = [QLRowActionButton buttonWithRowAction:action];
+            [btn sizeToFit];
+            [v addSubview:btn];
+            [btns addObject:btn];
+        }];
+        
+        CGFloat detalW = 0;
+        
+        if (btns.count == 2){
+            detalW = 30;
+        }else if (btns.count == 3){
+            detalW = 32;
+        }else{
+            detalW = 33;
+        }
+        
+        CGFloat maxX = self.bounds.size.width;
+        CGFloat height = self.bounds.size.height;
+        
+        for (UIView *btn in btns) {
+            CGRect rect = btn.frame;
+            rect.origin.y = 0;
+            rect.size.width += detalW;
+            rect.size.height = height;
+            rect.origin.x = maxX - rect.size.width;
+            maxX -= rect.size.width;
+            btn.frame = rect;
+        }
+        swipWidth = v.frame.size.width - maxX;
+        [super addSubview:v];
+        self.swipBgView = v;
         return;
     }
-    
+}
+
+- (void)handleiOS7
+{
     NSArray *subviews = [self subviews];
+    UIView *confirmView = nil;
+    
     UIView *scrollView = nil;
     for (UIView *v in subviews) {
         if (NSNotFound != [NSStringFromClass([v class]) rangeOfString:@"TableViewCellScrollView"].location){
@@ -47,8 +150,9 @@
     if (!scrollView) {
         return;
     }
+    
     subviews = [scrollView subviews];
-    UIView *confirmView = nil;
+    
     for (UIView *v in subviews) {
         if (NSNotFound != [NSStringFromClass([v class]) rangeOfString:@"TableViewCellDeleteConfirmationView"].location){
             confirmView = v;
@@ -60,7 +164,9 @@
         return;
     }
     
-    [[confirmView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    self.confirmView = confirmView;
+    
+    [[confirmView subviews] makeObjectsPerformSelector:@selector(setHidden:) withObject:@(YES)];
     
     UITableView *tb = (id)self;
     while (![tb isKindOfClass:[UITableView class]]) {
@@ -72,14 +178,14 @@
     
     NSMutableArray *btns = [[NSMutableArray alloc]init];
     [actions enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(QLTableViewRowAction *action, NSUInteger idx, BOOL * _Nonnull stop) {
-        RowActionButton *btn = [RowActionButton buttonWithRowAction:action];
+        QLRowActionButton *btn = [QLRowActionButton buttonWithRowAction:action];
         [btn sizeToFit];
         [confirmView addSubview:btn];
         [btns addObject:btn];
     }];
     
-    CGFloat lastX = 0;
     CGFloat detalW = 0;
+    
     if (btns.count == 1) {
         detalW = 30;
     }else if (btns.count == 2){
@@ -89,9 +195,11 @@
     }else{
         detalW = 35;
     }
+    
+    CGFloat lastX = 0;
     CGFloat height = self.bounds.size.height;
     
-    for (RowActionButton *btn in btns) {
+    for (UIView *btn in btns) {
         CGRect rect = btn.frame;
         rect.origin.x = lastX;
         rect.origin.y = 0;
@@ -104,7 +212,7 @@
 
 - (void)insertSubview:(UIView *)view atIndex:(NSInteger)index
 {
-    if (![self iOS8Before]) {
+    if ([QLVersionUtil iOS8Later]) {
         if (NSNotFound != [NSStringFromClass([view class]) rangeOfString:@"TableViewCellDeleteConfirmationView"].location){
             //iOS 8.3 display 1px bg is red；
             view.backgroundColor = self.backgroundColor;

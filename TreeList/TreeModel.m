@@ -21,6 +21,6 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"leval:%ld,Date:%@",_leval,_date];
+    return [NSString stringWithFormat:@"leval:%ld,Date:%@",(long)_leval,_date];
 }
 @end

@@ -1,31 +1,33 @@
 //
-//  RowActionButton.m
+//  QLRowActionButton.m
 //  TreeList
 //
-//  Created by qianlongxu on 16/3/15.
+//  Created by qianlongxu on 16/4/13.
 //  Copyright © 2016年 Debugly. All rights reserved.
 //
 
-#import "RowActionButton.h"
-#import "QLTableViewRowActionInternal.h"
+#import "QLRowActionButton.h"
 
-@interface RowActionButton ()
+#import "QLTableViewRowActionInternal.h"
+#import "QLVersionUtil.h"
+
+@interface QLRowActionButton ()
 
 @property (nonatomic, strong ,readwrite) QLTableViewRowAction *rowAction;
 
 @end
 
-@implementation RowActionButton
+@implementation QLRowActionButton
 
 + (instancetype)buttonWithRowAction:(QLTableViewRowAction *)rowAction
 {
-    RowActionButton *btn = [self buttonWithType:UIButtonTypeCustom];
+    QLRowActionButton *btn = [self buttonWithType:UIButtonTypeCustom];
     btn.rowAction = rowAction;
     [btn setTitle:rowAction.title forState:UIControlStateNormal];
     [btn setTitle:rowAction.title forState:UIControlStateHighlighted];
-    [btn.titleLabel setFont:[UIFont systemFontOfSize:18]];
+    [btn.titleLabel setFont:[UIFont systemFontOfSize:[QLVersionUtil iOS6]?14:18]];
     [btn setBackgroundColor:rowAction.backgroundColor];
-
+    
     [btn addTarget:btn action:@selector(clickedAction) forControlEvents:UIControlEventTouchUpInside];
     
     [rowAction addObserver:btn forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
@@ -68,7 +70,7 @@
             tb = (id)[tb superview];
         }
         NSIndexPath *idx = [tb indexPathForCell:cell];
-
+        
         self.rowAction.RowActionHanler(self.rowAction,idx);
     }
 }

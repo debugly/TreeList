@@ -8,18 +8,19 @@
 
 #import "QLTableViewRowAction.h"
 #import "QLTableViewRowActionInternal.h"
+#import "QLVersionUtil.h"
 
 @implementation QLTableViewRowAction
 
 + (instancetype)rowActionWithStyle:(QLTableViewRowActionStyle)style title:(NSString *)title handler:(void (^)(QLTableViewRowAction *action, NSIndexPath *indexPath))handler
 {
     QLTableViewRowAction *instance = nil;
-    BOOL iOS8Before = ([[[UIDevice currentDevice]systemVersion]compare:@"8" options:NSNumericSearch] == NSOrderedAscending);
-    if (iOS8Before) {
-        instance = [[QLTableViewRowAction alloc]initWithStyle:style title:title handler:handler];
-    }else{
+    
+    if ([QLVersionUtil iOS8Later]) {
         Class clazz = NSClassFromString(@"UITableViewRowAction");
         instance = [clazz rowActionWithStyle:style title:title handler:handler];
+    }else{
+        instance = [[QLTableViewRowAction alloc]initWithStyle:style title:title handler:handler];
     }
     return instance;
 }

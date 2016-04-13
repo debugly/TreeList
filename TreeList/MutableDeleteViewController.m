@@ -8,7 +8,6 @@
 
 #import "MutableDeleteViewController.h"
 #import "QLTableViewRowAction.h"
-#import "RowActionButton.h"
 #import "QLTableViewCell.h"
 
 @interface MutableDeleteViewController ()
