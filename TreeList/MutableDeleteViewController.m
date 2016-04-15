@@ -73,7 +73,7 @@
 {
     NSArray *actions = [self tableView:tableView editActionsForRowAtIndexPath:indexPath];
     NSArray *titles  = [actions valueForKeyPath:@"title"];
-    return [titles componentsJoinedByString:@"拼接"];
+    return [titles componentsJoinedByString:@""];
 }
 
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath

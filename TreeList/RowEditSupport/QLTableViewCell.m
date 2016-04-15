@@ -16,24 +16,55 @@
 @property (nonatomic, weak) UIView *confirmView;//
 @property (nonatomic, assign)CGFloat swipWidth;
 
+@property (nonatomic, strong) UIButton *moreOptionButton;
+@property (nonatomic, strong) UIScrollView *cellScrollView;
 @end
 
 @implementation QLTableViewCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        _moreOptionButton = nil;
+        _cellScrollView = nil;
+        if ([QLVersionUtil iOS7]) {
+            [self setupObserving];
+        }
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        _moreOptionButton = nil;
+        _cellScrollView = nil;
+        if ([QLVersionUtil iOS7]) {
+            [self setupObserving];
+        }
+    }
+    return self;
+}
+
+
+- (void)dealloc {
+    [self.cellScrollView.layer removeObserver:self forKeyPath:@"sublayers" context:nil];
+}
 
 /*iOS7 cell 层级结构：
  UITableViewCell
  UITableViewCellScrollView
  UITableViewCellDeleteConfirmationView
  UITableViewCellContentView
-
-iOS6 cell 层级结构：
-UITableViewCell
-UITableViewCellContentView
-UIView(sep line)
-UITableViewCellDeleteConfirmationControl
+ 
+ iOS6 cell 层级结构：
+ UITableViewCell
+ UITableViewCellContentView
+ UIView(sep line)
+ UITableViewCellDeleteConfirmationControl
  
  因此分别处理！
-*/
+ */
 
 //处理 iOS6 上的动画！
 - (void)willTransitionToState:(UITableViewCellStateMask)state
@@ -74,8 +105,6 @@ UITableViewCellDeleteConfirmationControl
     
     if(self.confirmView){
         return;
-    }else if ([QLVersionUtil iOS7]) {
-        [self handleiOS7];
     }else if([QLVersionUtil iOS6]){
         [self handleiOS6:confirmView];
     }
@@ -100,7 +129,7 @@ UITableViewCellDeleteConfirmationControl
     self.confirmView = confirmView;
 }
 
-- (CGFloat)configureRowActionButtons:(UIView *)superview detal:(CGFloat (^)(NSUInteger count))detalBlock
+- (CGFloat)configureRowActionButtons:(UIView *)superview
 {
     UITableView *tb = (id)self;
     while (![tb isKindOfClass:[UITableView class]]) {
@@ -110,28 +139,21 @@ UITableViewCellDeleteConfirmationControl
     NSIndexPath *idx = [tb indexPathForCell:self];
     NSArray *actions = [tb.delegate tableView:tb editActionsForRowAtIndexPath:idx];
     
-    NSMutableArray *btns = [[NSMutableArray alloc]init];
-    [actions enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(QLTableViewRowAction *action, NSUInteger idx, BOOL * _Nonnull stop) {
+    CGFloat startX = self.bounds.size.width;
+    CGFloat height = self.bounds.size.height;
+    
+    for (QLTableViewRowAction *action in actions) {
         QLRowActionButton *btn = [QLRowActionButton buttonWithRowAction:action];
         [btn sizeToFit];
         [superview addSubview:btn];
-        [btns addObject:btn];
-    }];
-    
-    CGFloat detalW = detalBlock(btns.count);
-    CGFloat maxX = superview.bounds.size.width;
-    CGFloat height = self.bounds.size.height;
-    
-    for (UIView *btn in btns) {
         CGRect rect = btn.frame;
         rect.origin.y = 0;
-        rect.size.width += detalW;
+        rect.size.width += 15;
         rect.size.height = height;
-        rect.origin.x = (maxX -= rect.size.width);
+        rect.origin.x = (startX -= rect.size.width);
         btn.frame = rect;
     }
-    
-    return maxX;
+    return startX;
 }
 
 - (void)handleiOS6:(UIView *)confirmView
@@ -139,74 +161,149 @@ UITableViewCellDeleteConfirmationControl
     if([NSStringFromClass([confirmView class]) isEqualToString:@"UITableViewCellDeleteConfirmationControl"]){
         
         [self updateConfirmView:confirmView];
+        CGRect rect = confirmView.frame;
         
         UIView *v = [UIView new];
         v.frame = self.bounds;
         [super addSubview:v];
         self.swipBgView = v;
         
-        CGFloat startX = [self configureRowActionButtons:v detal:^CGFloat(NSUInteger count) {
-            CGFloat detalW = 0;
-            if (count == 2){
-                detalW = 30;
-            }else if (count == 3){
-                detalW = 32;
-            }else{
-                detalW = 33;
-            }
-            return detalW;
-        }];
+        CGFloat startX = [self configureRowActionButtons:v];
         self.swipWidth = v.frame.size.width - startX;
+        rect.origin.x = self.swipWidth;
+        rect.size.width = self.swipWidth;
+        confirmView.frame = rect;
         
         return;
     }
 }
 
-- (void)handleiOS7
-{
-    NSArray *subviews = [self subviews];
-    UIView *confirmView = nil;
-    
-    UIView *scrollView = nil;
-    for (UIView *v in subviews){
-        if (NSNotFound != [NSStringFromClass([v class]) rangeOfString:@"TableViewCellScrollView"].location){
-            scrollView = v;
+- (void)setupObserving {
+    for (CALayer *layer in self.layer.sublayers) {
+        if ([layer.delegate isKindOfClass:[UIScrollView class]]) {
+            _cellScrollView = (UIScrollView *)layer.delegate;
+            [_cellScrollView.layer addObserver:self forKeyPath:@"sublayers" options:NSKeyValueObservingOptionNew context:nil];
             break;
         }
     }
-    
-    if (!scrollView){
-        return;
-    }
-    
-    subviews = [scrollView subviews];
-    
-    for (UIView *v in subviews) {
-        if (NSNotFound != [NSStringFromClass([v class]) rangeOfString:@"TableViewCellDeleteConfirmationView"].location){
-            confirmView = v;
-            break;
-        }
-    }
-    
-    if (!confirmView){
-        return;
-    }
-    
-    [self updateConfirmView:confirmView];
-    
-    [self configureRowActionButtons:confirmView detal:^CGFloat(NSUInteger count) {
-        CGFloat detalW = 0;
-        if (count == 1) {
-            detalW = 30;
-        }else if (count == 2){
-            detalW = 33;
-        }else if (count == 3){
-            detalW = 34;
-        }else{
-            detalW = 35;
-        }
-        return detalW;
-    }];
 }
+
+- (void)willRemoveSubview:(UIView *)subview {
+    [super willRemoveSubview:subview];
+    if ([QLVersionUtil iOS7]) {
+        // Set the 'more' button to nil if the 'swipe to delete' container view won't be visible anymore.
+        NSString *className = NSStringFromClass(subview.class);
+        if ([className hasPrefix:@"UI"] && [className hasSuffix:@"ConfirmationView"]) {
+            self.moreOptionButton = nil;
+        }
+    }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"sublayers"]) {
+        /*
+         * Using '==' instead of 'isEqual:' to compare the observed object and the cell's contentScrollView's layer
+         * (for iOS 7) OR the cell's layer (for iOS 8) because it must be the same instance and not an equal one.
+         */
+        if (object == self.cellScrollView.layer || object == self.layer) {
+            BOOL swipeToDeleteControlVisible = NO;
+            for (CALayer *layer in [(CALayer *)object sublayers]) {
+                /*
+                 * Check if the view is the 'swipe to delete' container view.
+                 */
+                NSString *name = NSStringFromClass([layer.delegate class]);
+                if ([name hasPrefix:@"UI"] && [name hasSuffix:@"ConfirmationView"]) {
+                    
+                    swipeToDeleteControlVisible = YES;
+                    
+                    if (!self.moreOptionButton) {
+                        
+                        UIView *deleteConfirmationView = layer.delegate;
+                        UIButton *deleteConfirmationButton = nil;
+                        
+                        for (UIView *subview in deleteConfirmationView.subviews) {
+                            NSString *subviewClass = NSStringFromClass([subview class]);
+                            if ([subviewClass hasPrefix:@"UI"] &&
+                                [subviewClass rangeOfString:@"Delete"].length > 0 &&
+                                [subviewClass hasSuffix:@"Button"]) {
+                                
+                                deleteConfirmationButton = (UIButton *)subview;
+                                break;
+                            }
+                        }
+                        
+                        [self configureMoreOptionButtonForDeleteConfirmationView:deleteConfirmationView
+                                                    withDeleteConfirmationButton:deleteConfirmationButton];
+                    }
+                }
+            }
+            // Set the 'more' button to nil if the 'swipe to delete' container view isn't visible anymore.
+            if (!swipeToDeleteControlVisible) {
+                self.moreOptionButton = nil;
+            }
+        }
+    }
+}
+
+- (UITableView *)tableView {
+    UIView *tableView = self.superview;
+    while(tableView) {
+        if(![tableView isKindOfClass:[UITableView class]]) {
+            tableView = tableView.superview;
+        }
+        else {
+            return (UITableView *)tableView;
+        }
+    }
+    return nil;
+}
+
+
+- (void)configureMoreOptionButtonForDeleteConfirmationView:(UIView *)deleteConfirmationView
+                              withDeleteConfirmationButton:(UIButton *)deleteConfirmationButton {
+    
+    /*
+     * 'Normalize' 'UITableViewCellDeleteConfirmationView's' title text implementation, because
+     * under iOS 7 UIKit itself doesn't show the text using it's 'UIButtonLabel's' setTitle: but
+     * using a seperate 'UILabel'.
+     *
+     * WHY Apple, WHY?
+     *
+     */
+    
+    if (![QLVersionUtil iOS6]) {
+        [deleteConfirmationButton.subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop) {
+            if ([view class] == [UILabel class]) {
+                UILabel *titleLabel = (UILabel *)view;
+                NSString *deleteConfirmationButtonTitle = titleLabel.text;
+                [titleLabel removeFromSuperview];
+                titleLabel = nil;
+                
+                [deleteConfirmationButton setTitle:deleteConfirmationButtonTitle forState:UIControlStateNormal];
+                
+                // Needed because otherwise the sizing algorithm wouldn't work for iOS 7
+                deleteConfirmationButton.autoresizingMask = UIViewAutoresizingNone;
+                
+                *stop = YES;
+            }
+        }];
+        // Set default titleEdgeInsets on 'delete' button
+        [deleteConfirmationButton setTitleEdgeInsets:UIEdgeInsetsMake(0.f, 15.f, 0.f, 15.f)];
+        // Set clipsToBounds to YES on 'delete' button is necessary because otherwise it wouldn't
+        // be possible to hide it settings it's frame's width to zero (the title would appear anyway).
+        deleteConfirmationButton.clipsToBounds = YES;
+        
+    }
+    
+    
+    [self.moreOptionButton setTitle:@"取消自动删除" forState:UIControlStateNormal];
+    
+    // If created add the 'more' button to the cell's view hierarchy
+    if (self.moreOptionButton) {
+        [deleteConfirmationView addSubview:self.moreOptionButton];
+    }
+    
+}
+
 
 @end
