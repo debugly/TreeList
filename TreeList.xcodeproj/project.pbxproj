@@ -393,7 +393,7 @@
 				INFOPLIST_FILE = TreeList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xql.TreeListnn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xql.TreeList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -407,7 +407,7 @@
 				INFOPLIST_FILE = TreeList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xql.TreeListnn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xql.TreeList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
