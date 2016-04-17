@@ -15,4 +15,6 @@
 
 @interface QLTableViewCell : UITableViewCell
 
+- (void)hideDeleteConfirmation;
+
 @end

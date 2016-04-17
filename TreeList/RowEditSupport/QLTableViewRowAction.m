@@ -43,6 +43,8 @@
                 self.backgroundColor = [UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1.0];
             }
         }
+        self.titleColor = [UIColor whiteColor];
+        self.edgeInsets = UIEdgeInsetsMake(0, 15, 0, 15);
     }
     return self;
 }

@@ -22,6 +22,8 @@ typedef NS_ENUM(NSInteger, QLTableViewRowActionStyle) {
 
 @property (nonatomic, readonly) QLTableViewRowActionStyle style;
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) UIColor *backgroundColor; // default background color is dependent on style
+@property (nonatomic, strong) UIColor *titleColor;
+@property (nonatomic, assign) UIEdgeInsets edgeInsets;//default is (0, 15, 0, 15)
+@property (nonatomic, strong) UIColor *backgroundColor; // default background color is dependent on style
 
 @end

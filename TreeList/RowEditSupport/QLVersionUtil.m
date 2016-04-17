@@ -26,6 +26,11 @@
     return [self currentSystemVersion] >= 8;
 }
 
++ (BOOL)iOS7Later
+{
+    return [self currentSystemVersion] >= 7;
+}
+
 + (BOOL)iOS7
 {
     return [self currentSystemVersion] == 7;

@@ -9,6 +9,7 @@
 #import "MutableDeleteViewController.h"
 #import "QLTableViewRowAction.h"
 #import "QLTableViewCell.h"
+#import "QLVersionUtil.h"
 
 @interface MutableDeleteViewController ()
 
@@ -33,6 +34,7 @@
         [self.objects addObject:[NSDate date]];
     }
     [self.tableView reloadData];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -72,26 +74,30 @@
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSArray *actions = [self tableView:tableView editActionsForRowAtIndexPath:indexPath];
-    NSArray *titles  = [actions valueForKeyPath:@"title"];
-    return [titles componentsJoinedByString:@""];
+    QLTableViewRowAction *action = [actions firstObject];
+    return [action title];
 }
 
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     QLTableViewRowAction *action1 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleDefault title:@"1自动删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
-        
+        NSLog(@"clicked :%@",action.title);
     }];
     
     QLTableViewRowAction *action2 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleDefault title:@"2自删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
-        
+        NSLog(@"clicked :%@",action.title);
+        //iOS 8 later，you need close it；
+        if ([QLVersionUtil iOS8Later]) {
+            [[tableView cellForRowAtIndexPath:indexPath]hideDeleteConfirmation];
+        }
     }];
     
     QLTableViewRowAction *action3 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleNormal title:@"3删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
-        
+        NSLog(@"clicked :%@",action.title);
     }];
     
     QLTableViewRowAction *action4 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleNormal title:@"4不删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
-        
+        NSLog(@"clicked :%@",action.title);
     }];
     
     NSArray *bgColors = @[[UIColor colorWithRed:255.0f/255.0f green:59.0f/255.0f blue:48.0f/255.0f alpha:1.0],
@@ -115,11 +121,17 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle != UITableViewCellEditingStyleDelete) {
-        //just handle other style，such as insert，none；
+        //just handle other edit style
     }
 }
 
-#pragma mark - edit logic end
-
+//滑动的时候关闭侧滑的cell；
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    UITableView *tb = (id)scrollView;
+    for (QLTableViewCell *cell in [tb visibleCells]) {
+        [cell hideDeleteConfirmation];
+    }
+}
 
 @end

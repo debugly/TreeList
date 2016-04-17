@@ -15,6 +15,8 @@
 + (int)currentSystemVersion;
 ///当前系统版本是否是iOS8之后的
 + (BOOL)iOS8Later;
+///当前系统版本是否是iOS7之后的
++ (BOOL)iOS7Later;
 ///当前系统版本是否是iOS7
 + (BOOL)iOS7;
 ///当前系统版本是否是iOS6
