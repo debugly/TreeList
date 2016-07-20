@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RMx-3f-FxP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RMx-3f-FxP">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -284,10 +284,10 @@
             </objects>
             <point key="canvasLocation" x="1149" y="-559"/>
         </scene>
-        <!--编辑-->
+        <!--iOS8之前的系统编辑-->
         <scene sceneID="bgg-HI-L7N">
             <objects>
-                <tableViewController title="编辑" clearsSelectionOnViewWillAppear="NO" id="KH4-N8-Au9" customClass="MutableSelectViewController" sceneMemberID="viewController">
+                <tableViewController title="iOS8之前的系统编辑" clearsSelectionOnViewWillAppear="NO" id="KH4-N8-Au9" customClass="MutableSelectViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="3Th-gO-6JS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -325,7 +325,7 @@
                             <outlet property="delegate" destination="KH4-N8-Au9" id="Rf9-kQ-Dbf"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="编辑" id="IXx-MW-jAW"/>
+                    <navigationItem key="navigationItem" title="iOS8之前的系统编辑" id="IXx-MW-jAW"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y3p-rS-Qfm" sceneMemberID="firstResponder"/>
             </objects>

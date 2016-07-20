@@ -3,7 +3,11 @@
 
 `主要包含 UITableView 的各种编辑状态，先看效果吧：`
 
-<img src="https://github.com/debugly/TreeList/blob/master/NewList.gif" width="747" height="1113">
+<img src="NewList.gif" width="747" height="1113">
+
+很详细的系统编辑，我写的不一定好使，但必须要掌握系统编辑！看图：
+
+<img src="BeforeiOS8SystemEdit.gif" width="747" height="1113">
 
 
 ####一、侧滑删除（兼容iOS8之前的版本）实现：

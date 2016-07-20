@@ -99,13 +99,13 @@
 			name = "详情";
 			sourceTree = "<group>";
 		};
-		480C65901C9BB9070008B1F2 /* 系统编辑 */ = {
+		480C65901C9BB9070008B1F2 /* iOS8之前的系统编辑 */ = {
 			isa = PBXGroup;
 			children = (
 				480C658D1C9BB9030008B1F2 /* MutableSelectViewController.h */,
 				480C658E1C9BB9030008B1F2 /* MutableSelectViewController.m */,
 			);
-			name = "系统编辑";
+			name = "iOS8之前的系统编辑";
 			sourceTree = "<group>";
 		};
 		480C65911C9BB9180008B1F2 /* Pages */ = {
@@ -113,7 +113,7 @@
 			children = (
 				480C658B1C9BB88A0008B1F2 /* 侧滑删除 */,
 				480C658A1C9BB87B0008B1F2 /* 树形列表 */,
-				480C65901C9BB9070008B1F2 /* 系统编辑 */,
+				480C65901C9BB9070008B1F2 /* iOS8之前的系统编辑 */,
 				480C65931C9BC2F70008B1F2 /* 多选+侧滑 */,
 				480C658C1C9BB8A40008B1F2 /* 详情 */,
 			);

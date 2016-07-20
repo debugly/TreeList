@@ -30,13 +30,37 @@
     //根据当前的编辑状态返回标题
     BOOL isEdit = self.isEditing;
     NSString *title = isEdit ? @"完成" : @"编辑";
-    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithTitle:title style:UIBarButtonItemStylePlain target:self action:@selector(setEditing:animated:)];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithTitle:title style:UIBarButtonItemStylePlain target:self action:@selector(clickedEditingItem:)];
     return item;
+}
+
+- (void)clickedEditingItem:(UIBarButtonItem *)editItem
+{
+    //与当前相反！
+    [self setEditing:!self.editing animated:YES];
 }
 
 - (void)updateEditBarButtonItem
 {
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)prefareHeaderView
+{
+    UIView *bg = [[UIView alloc]init];
+    self.tableView.backgroundView = bg;
+    
+    UILabel *trip = [[UILabel alloc]init];
+    trip.text = @"完全使用 iOS8 前的API，所以侧滑只能展示一个按钮；\n你可以修改他的 Title；\nDemo实现了自定义编辑按钮，支持多选和侧滑删除！";
+    trip.numberOfLines = 0;
+    trip.textAlignment = NSTextAlignmentLeft;
+    trip.font = [UIFont systemFontOfSize:16];
+    trip.textColor = [UIColor orangeColor];
+    
+    CGSize tripSize = [trip sizeThatFits:CGSizeMake(self.view.bounds.size.width - 30, CGFLOAT_MAX)];
+    trip.frame = CGRectMake(15, 68, tripSize.width, tripSize.height);
+    
+    [self.tableView.backgroundView addSubview:trip];
 }
 
 - (void)viewDidLoad {
@@ -50,6 +74,8 @@
         [self.objects addObject:@(i++)];
     }
   
+    [self prefareHeaderView];
+    
 //正常情况下的选择，不影响编辑状态！
     /*
      是否允许选中；不会影响 allowsMultipleSelection；即使这个为NO，也可以多选！
@@ -130,35 +156,30 @@
 
 */
 
-//删除，插入，侧滑都会调用此方法；iOS8侧滑除外！多选不会触发这个方法！
+//删除，插入，侧滑都会调用此方法；iOS8形式的侧滑除外！多选不会触发这个方法！
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (UITableViewCellEditingStyleDelete == editingStyle) {
+        [self doDeleteRows:@[indexPath]];
+    }
 }
 
-//重写这个方法，处理多选处理！
+//修改默认红色标题！
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"移至废纸篓";
+}
+
+//重写这个方法，处理多选处理！侧滑删除完也会调用这个，不过 indexPathsForSelectedRows = nil;
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     NSLog(@"---%d",self.tableView.allowsMultipleSelectionDuringEditing);
-    //重写了 editButtonItem 方法，因此这里需要取下反！
-    editing = !self.editing;
+    
     //结束编辑;
     if (!editing) {
         //获取选择行的indexpath；
         NSArray *selectedRows = self.tableView.indexPathsForSelectedRows;
-        //因为我只有一个区，因此我可以偷懒（^_^）,直接获取row数组；对应的就是数组的下标！
-        NSArray *selectedIdx = [selectedRows valueForKeyPath:@"self.row"];
-        //很多人没用过这个方法，将arr转为indexset的；
-        NSIndexSet *indexset = [selectedIdx indexesOfObjectsPassingTest:^BOOL(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            return YES;
-        }];
-        //有选择就删除；这里可以根据自己的业务逻辑写；
-        if (indexset && indexset.count > 0) {
-            [self.objects removeObjectsAtIndexes:indexset];
-            [self.tableView beginUpdates];
-            [self.tableView deleteRowsAtIndexPaths:selectedRows withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self.tableView endUpdates];
-        }
+        [self doDeleteRows:selectedRows];
     }
     //先处理业务，然后再调用super，因为调用super会清空 indexPathsForSelectedRows ！！！
     [super setEditing:editing animated:animated];
@@ -186,4 +207,26 @@
     }
 }
 
+#pragma mark - 删除业务
+- (void)doDeleteRows:(NSArray *)selectedRows
+{
+    if (!selectedRows || selectedRows.count < 1) {
+        return;
+    }
+    //因为我只有一个区，因此我可以偷懒（^_^）,直接获取row数组；对应的就是数组的下标！
+    NSArray *selectedIdx = [selectedRows valueForKeyPath:@"self.row"];
+    //很多人没用过这个方法，将arr转为indexset的；
+    NSIndexSet *indexset = [selectedIdx indexesOfObjectsPassingTest:^BOOL(NSNumber * obj, NSUInteger idx, BOOL * stop) {
+        return YES;
+    }];
+    
+    //有选择就删除；这里可以根据自己的业务逻辑写；
+    if (indexset && indexset.count > 0) {
+        [self.objects removeObjectsAtIndexes:indexset];
+        [self.tableView beginUpdates];
+        [self.tableView deleteRowsAtIndexPaths:selectedRows withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView endUpdates];
+    }
+
+}
 @end
