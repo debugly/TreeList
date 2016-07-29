@@ -13,28 +13,32 @@
 
 @interface MutableDeleteViewController ()
 
-@property (nonatomic, strong) NSMutableArray *objects;
+@property (nonatomic, strong) NSArray *sectionObjects;
 
 @end
 
 @implementation MutableDeleteViewController
 
-- (NSMutableArray *)objects
-{
-    if (!_objects) {
-        _objects = [[NSMutableArray alloc]init];
-    }
-    return _objects;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    int random = arc4random() % 26 + 1;
-    while (random--) {
-        [self.objects addObject:[NSDate date]];
-    }
-    [self.tableView reloadData];
     
+    int random = arc4random() % 26 + 1;
+    
+    NSMutableArray *section0Arr = [[NSMutableArray alloc]init];
+    NSMutableArray *section1Arr = [[NSMutableArray alloc]init];
+    
+    while (random--) {
+        if(random % 2){
+            [section0Arr addObject:@(random)];
+        }else{
+            [section1Arr addObject:@(random)];
+        }
+    }
+    
+    self.sectionObjects = @[section0Arr,section1Arr];
+    
+    [self.tableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -45,17 +49,29 @@
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return self.sectionObjects.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.objects.count;
+    NSArray *sectionObjs = self.sectionObjects[section];
+    return sectionObjs.count;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if(section == 0){
+        return @"支持侧滑";
+    }else{
+        return @"不支持侧滑";
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    NSDate *date = self.objects[indexPath.row];
-    cell.textLabel.text = [date description];
+    NSArray *sectionObjs = self.sectionObjects[indexPath.section];
+    
+    NSNumber *i = sectionObjs[indexPath.row];
+    cell.textLabel.text = [i description];
     return cell;
 }
 
@@ -68,6 +84,9 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
+    if (indexPath.section == 1) {
+        return NO;
+    }
     return YES;
 }
 
