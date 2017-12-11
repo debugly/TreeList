@@ -30,43 +30,43 @@ SW 性能问题：
 
 ```objc
 
-    - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
-    {
-        QLTableViewRowAction *action1 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleDefault title:@"1自动删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
-            //handle your click event
-        }];
+- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+QLTableViewRowAction *action1 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleDefault title:@"1自动删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
+    //handle your click event
+}];
 
-        QLTableViewRowAction *action2 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleDefault title:@"2自删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
-            //handle your click event
-        }];
+QLTableViewRowAction *action2 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleDefault title:@"2自删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
+    //handle your click event
+}];
 
-        QLTableViewRowAction *action3 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleNormal title:@"3删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
-            //handle your click event
-        }];
+QLTableViewRowAction *action3 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleNormal title:@"3删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
+    //handle your click event
+}];
 
-        QLTableViewRowAction *action4 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleNormal title:@"4不删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
-            //handle your click event
-        }];
+QLTableViewRowAction *action4 = [QLTableViewRowAction rowActionWithStyle:QLTableViewRowActionStyleNormal title:@"4不删除" handler:^(QLTableViewRowAction *action, NSIndexPath *indexPath) {
+    //handle your click event
+}];
 
-        NSArray *bgColors = @[[UIColor colorWithRed:255.0f/255.0f green:59.0f/255.0f blue:48.0f/255.0f alpha:1.0],
-        [UIColor colorWithRed:255.0f/255.0f green:156.0f/255.0f blue:3.0f/255.0f alpha:1.0],
-        [UIColor colorWithRed:255.0f/255.0f green:128.0f/255.0f blue:1.0f/255.0f alpha:1.0]];
+NSArray *bgColors = @[[UIColor colorWithRed:255.0f/255.0f green:59.0f/255.0f blue:48.0f/255.0f alpha:1.0],
+[UIColor colorWithRed:255.0f/255.0f green:156.0f/255.0f blue:3.0f/255.0f alpha:1.0],
+[UIColor colorWithRed:255.0f/255.0f green:128.0f/255.0f blue:1.0f/255.0f alpha:1.0]];
 
-        //configure bg color
-        action2.backgroundColor = bgColors[1];
-        action3.backgroundColor = bgColors[1];
-        action4.backgroundColor = bgColors[2];
+//configure bg color
+action2.backgroundColor = bgColors[1];
+action3.backgroundColor = bgColors[1];
+action4.backgroundColor = bgColors[2];
 
-        if (indexPath.row == 0) {
-            return @[action1];
-        }else if (indexPath.row == 1){
-            return @[action1,action2];
-        }else if (indexPath.row == 2){
-            return @[action1,action2,action3];
-        }
-        
-        return @[action1,action2,action3,action4];
-    }
+if (indexPath.row == 0) {
+    return @[action1];
+}else if (indexPath.row == 1){
+    return @[action1,action2];
+}else if (indexPath.row == 2){
+    return @[action1,action2,action3];
+}
+
+return @[action1,action2,action3,action4];
+}
 
 ```
 
@@ -76,8 +76,8 @@ SW 性能问题：
 主要使用了系统的特性，系统 cell 是支持向右缩进的；核心代码：
 
 ```objc
-	cell.indentationLevel = model.leval;
-	cell.indentationWidth = 10 * cell.indentationLevel;
+cell.indentationLevel = model.leval;
+cell.indentationWidth = 10 * cell.indentationLevel;
 ```
 思路是把 cell 的 indentationLevel 记录在对应的 model 里；下一个层级 cell 的 indentationLevel 比当前层级大 1；这样就会自动偏移；
 
